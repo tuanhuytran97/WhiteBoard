@@ -1,0 +1,86 @@
+[debug] [2022-04-01T02:22:12.893Z] ----------------------------------------------------------------------
+[debug] [2022-04-01T02:22:12.894Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\tuanh\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2022-04-01T02:22:12.894Z] CLI Version:   10.5.0
+[debug] [2022-04-01T02:22:12.894Z] Platform:      win32
+[debug] [2022-04-01T02:22:12.894Z] Node Version:  v16.14.0
+[debug] [2022-04-01T02:22:12.895Z] Time:          Fri Apr 01 2022 04:22:12 GMT+0200 (Central European Summer Time)
+[debug] [2022-04-01T02:22:12.895Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-04-01T02:22:12.963Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-04-01T02:22:12.963Z] > authorizing via signed-in user (tuanhuytran97@gmail.com)
+[debug] [2022-04-01T02:22:13.112Z] java version "11.0.13" 2021-10-19 LTS
+Java(TM) SE Runtime Environment 18.9 (build 11.0.13+10-LTS-370)
+
+[debug] [2022-04-01T02:22:13.112Z] Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.13+10-LTS-370, mixed mode)
+
+[debug] [2022-04-01T02:22:13.152Z] Parsed Java major version: 11
+[info] i  emulators: Starting emulators: auth, firestore, database, hosting, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, database, hosting, storage"}}
+[debug] [2022-04-01T02:22:13.174Z] [hub] writing locator at C:\Users\tuanh\AppData\Local\Temp\hub-react-firebase-draw.json
+[debug] [2022-04-01T02:22:13.185Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2022-04-01T02:22:13.185Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-04-01T02:22:13.185Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\tuanh\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.14.1.jar","--host","localhost","--port",8080,"--rules","C:\\Users\\tuanh\\Desktop\\Thesis\\Draw\\my-app\\firestore.rules"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\tuanh\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.14.1.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--rules\",\"C:\\\\Users\\\\tuanh\\\\Desktop\\\\Thesis\\\\Draw\\\\my-app\\\\firestore.rules\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2022-04-01T02:22:15.008Z] > refreshing access token with scopes: []
+[debug] [2022-04-01T02:22:15.009Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-04-01T02:22:15.096Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Fri, 01 Apr 2022 02:22:20 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-04-01T02:22:15.187Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/react-firebase-draw [none]
+[debug] [2022-04-01T02:22:15.491Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/react-firebase-draw 200
+[debug] [2022-04-01T02:22:15.491Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/react-firebase-draw {"projectId":"react-firebase-draw","projectNumber":"235503594236","displayName":"react-firebase-draw","name":"projects/react-firebase-draw","resources":{"hostingSite":"react-firebase-draw","realtimeDatabaseInstance":"react-firebase-draw-default-rtdb","storageBucket":"react-firebase-draw.appspot.com","locationId":"us-central"},"state":"ACTIVE"}
+[debug] [2022-04-01T02:22:15.491Z] database rules config:  [{"instance":"react-firebase-draw-default-rtdb","rules":"C:\\Users\\tuanh\\Desktop\\Thesis\\Draw\\my-app\\database.rules.json"}]
+[debug] [2022-04-01T02:22:15.494Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2022-04-01T02:22:15.494Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-04-01T02:22:15.494Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2022-04-01T02:22:15.494Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\tuanh\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.7.3.jar","--host","localhost","--port",9000],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\tuanh\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.7.3.jar\",\"--host\",\"localhost\",\"--port\",9000],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\"],\"joinArgs\":false}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2022-04-01T02:22:23.360Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-04-01T02:22:24.270Z] Temp file directory for storage emulator: C:\Users\tuanh\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\tuanh\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[debug] [2022-04-01T02:22:24.277Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/react-firebase-draw/sites 
+[debug] [2022-04-01T02:22:25.352Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/react-firebase-draw/sites 200
+[debug] [2022-04-01T02:22:25.352Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/react-firebase-draw/sites {"sites":[{"name":"projects/235503594236/sites/react-firebase-draw","defaultUrl":"https://react-firebase-draw.web.app","appId":"1:235503594236:web:866935c9b4d85fd0a8c579","type":"DEFAULT_SITE"}]}
+[debug] [2022-04-01T02:22:25.353Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/react-firebase-draw/webApps/1:235503594236:web:866935c9b4d85fd0a8c579/config [none]
+[debug] [2022-04-01T02:22:26.280Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/react-firebase-draw/webApps/1:235503594236:web:866935c9b4d85fd0a8c579/config 200
+[debug] [2022-04-01T02:22:26.280Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/react-firebase-draw/webApps/1:235503594236:web:866935c9b4d85fd0a8c579/config {"projectId":"react-firebase-draw","appId":"1:235503594236:web:866935c9b4d85fd0a8c579","databaseURL":"https://react-firebase-draw-default-rtdb.firebaseio.com","storageBucket":"react-firebase-draw.appspot.com","locationId":"us-central","apiKey":"AIzaSyD9ciRGxCzJxK3kk-rU0-e4AK-xm_1mKkU","authDomain":"react-firebase-draw.firebaseapp.com","messagingSenderId":"235503594236"}
+[info] i  hosting: Serving hosting files from: build {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mbuild\u001b[22m"}}
+[info] +  hosting: Local server: http://localhost:4000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:4000\u001b[22m\u001b[24m"}}
+[warn] !  ui: Emulator UI unable to start on port 4000, starting on 4001 instead. {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI unable to start on port 4000, starting on 4001 instead."}}
+[debug] [2022-04-01T02:22:26.848Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-04-01T02:22:26.848Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-04-01T02:22:26.848Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\tuanh\\.cache\\firebase\\emulators\\ui-v1.6.5\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\tuanh\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.6.5\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-04-01T02:22:26.986Z] Web / API server started at localhost:4001
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4001\n"}}
+[debug] [2022-04-01T02:22:27.119Z] >>> HTTP REQUEST PUT http://localhost:9000/.settings/rules.json?ns=react-firebase-draw-default-rtdb  
+ {
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+
+[debug] [2022-04-01T02:22:27.626Z] <<< HTTP RESPONSE 200 {"content-length":"15","content-type":"application/json; charset=utf-8","access-control-allow-origin":"*","cache-control":"no-cache","x-firebase-project-id":"react-firebase-draw-default-rtdb","x-firebase-project-number":"123456789","x-firebase-uuid":"00041baa-2241-44cb-b9d2-04ee993be6f2"}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4001                │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ localhost:9099 │ http://localhost:4001/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ localhost:8080 │ http://localhost:4001/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Database       │ localhost:9000 │ http://localhost:4001/database  │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Hosting        │ localhost:4000 │ n/a                             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ localhost:9199 │ http://localhost:4001/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2022-04-01T09:10:33.450Z] Received signal SIGHUP 1
