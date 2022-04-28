@@ -29,28 +29,30 @@ export const  getBase64 = (file) =>{
     return data;
 }
 
-    const useHistory = initialState => {
-        const [index, setIndex] = useState(0);
-        const [history, setHistory] = useState([initialState]);
-        const setState = (action, overwrite = false) => {
-            
-            const newState = typeof action === "function" ? action(history[index]) : action;
-            if (overwrite) {
-                const historyCopy = [...history];
-                historyCopy[index] = newState;
-                setHistory(historyCopy);
-            }else{
-                const updatedState = [...history].slice(0, index + 1);
-                setHistory([...updatedState, newState]);
-                setIndex(prevState => prevState + 1);
-            }
-        };
-        const undo = () => index > 0 && setIndex(prevState => prevState - 1);
-        const redo = () => index < history.length - 1 && setIndex(prevState => prevState + 1);
-        return [history[index], setState, undo, redo];
+//Store all state of elements
+const useHistory = initialState => {
+    const [index, setIndex] = useState(0);
+    const [history, setHistory] = useState([initialState]);
+    const setState = (action, overwrite = false) => {
+        
+        const newState = typeof action === "function" ? action(history[index]) : action;
+        if (overwrite) {
+            const historyCopy = [...history];
+            historyCopy[index] = newState;
+            setHistory(historyCopy);
+        }else{
+            const updatedState = [...history].slice(0, index + 1);
+            setHistory([...updatedState, newState]);
+            setIndex(prevState => prevState + 1);
+        }
     };
+    const undo = () => index > 0 && setIndex(prevState => prevState - 1);
+    const redo = () => index < history.length - 1 && setIndex(prevState => prevState + 1);
+    return [history[index], setState, undo, redo];
+};
 
 
+//Calculate coordiante
 const adjustElementCoordinates = element => {
     const { type, x1, y1, x2, y2 } = element;
     if (type === "rectangle" || type === "picture") {
@@ -79,12 +81,14 @@ const updateIndexElements = (elements) => {
     }
 }
 
+//Take element at position
 const getElementAtPosition = (x, y, elements) => {
     return elements.slice().reverse()
         .map(element => ({ ...element, position: positionWithinElement(x, y, element) }))
         .find(element => element.position !== null && element.isDeleted === false);
 };
 
+//calculate coordinate in element
 const positionWithinElement = (x, y, element) => {
     const { type, x1, x2, y1, y2 } = element;
     switch (type) {
@@ -128,9 +132,12 @@ const positionWithinElement = (x, y, element) => {
     }
 };
 
+//check near
 const nearPoint = (x,y,x1,y1, name) =>{
     return Math.abs(x - x1) < 5 && Math.abs(y - y1) < 5 ? name : null;
 }
+
+//check on the line
 const onLine = (x1, y1, x2, y2, x, y, maxDistance = 1) => {
     const a = { x: x1, y: y1 };
     const b = { x: x2, y: y2 };
@@ -139,8 +146,11 @@ const onLine = (x1, y1, x2, y2, x, y, maxDistance = 1) => {
     return Math.abs(offset) < maxDistance ? "inside" : null;
 };
 
+//calculate the distance
 const distance = (a,b) => Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y,2));
 
+
+//re-calculate the coordiante when using resize
 const resizedCoordinates = (clientX, clientY, position, coordinates) => {
     const { x1, y1, x2, y2 } = coordinates;
     switch (position) {
@@ -159,6 +169,8 @@ const resizedCoordinates = (clientX, clientY, position, coordinates) => {
             return null; //should not really get here...
     }
 };
+
+//show style cursor at position
 const cursorForPosition = position => {
     switch (position) {
         case "tl":
@@ -175,7 +187,7 @@ const cursorForPosition = position => {
     }
 };
 
-
+//Create element function
 const createElement = (id, x1, y1, x2, y2, type,options, src) => {
     switch (type) {
         case "line":
@@ -196,6 +208,8 @@ const createElement = (id, x1, y1, x2, y2, type,options, src) => {
 };
 
 const adjustmentRequired = type => ["line", "rectangle", "picture"].includes(type);
+
+//Get Svg function
 const getSvgPathFromStroke = stroke => {
     if (!stroke.length) return "";
 
@@ -212,6 +226,7 @@ const getSvgPathFromStroke = stroke => {
     return d.join(" ");
 };
 
+//check is a members?
 const isMembers = (members,uid) => {
     let count = 0;
     members.forEach((mem) => {

@@ -1,4 +1,4 @@
-import React, {useLayoutEffect,useState,useEffect,useRef, useContext, useMemo, useCallback} from 'react';
+import React, {useLayoutEffect,useState,useEffect,useRef, useContext} from 'react';
 import rough from 'roughjs/bundled/rough.esm';
 import Interface from './BoardComponents/Interface';
 import {getStroke} from "perfect-freehand";
@@ -8,15 +8,16 @@ import { AuthContext } from '../Context/AuthProvider';
 import Clear from './Actions/Clear';
 import firebase from 'firebase/app';
 import { db } from '../firebase/config';
-import { adjustElementCoordinates, useHistory, updateIndexElements, getElementAtPosition, 
+import { adjustElementCoordinates, useHistory, getElementAtPosition, 
     cursorForPosition, resizedCoordinates, createElement, 
-    getSvgPathFromStroke, adjustmentRequired, isMembers, getEventLocation, distance } from './BoardLibrary';
+    getSvgPathFromStroke, adjustmentRequired} from './BoardLibrary';
 import {  useSearchParams } from 'react-router-dom';
 import { useGetData } from '../firebase/service';
 
-
+//where to save the board's data
 export const BoardContext = React.createContext();
 
+//Check permission to control whiteboard
 const usePermission = (membersList, uid) => {
     const [permission, setPermisstion] = useState(false);
     useEffect(() => {
@@ -37,9 +38,9 @@ const usePermission = (membersList, uid) => {
 
 export default function Board({children}) {
     const {user : {
-        uid, photoURL, displayName
+        uid
     }} = useContext(AuthContext);
-    const {selectedRoomId,members,Membercontrols,setSelectedRoomId,selectedRoom} = useContext(AppContext);
+    const {selectedRoomId,Membercontrols,setSelectedRoomId} = useContext(AppContext);
     const [tool,setTool] = useState("cursor");
     const initData = useGetData(selectedRoomId);
     const [elements, setElements, undo, redo] = useHistory(initData);
@@ -82,6 +83,7 @@ export default function Board({children}) {
         
         
     })
+
     function toDataURL(url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
@@ -114,9 +116,8 @@ export default function Board({children}) {
        
         
     }
-    console.log(elements);
     
-    //Access via Link
+    //listen for searchParam's change event
     useEffect(() => {
         const u = searchParams.get("room") ;
         if(u){
@@ -136,15 +137,15 @@ export default function Board({children}) {
             }
         }
     },[searchParams]);
+    //listen for change event from firestore and update for client
     useEffect(()=>{
         if(selectedRoomId){
             const unsubscribe = db.collection('boards').doc(String(selectedRoomId)).onSnapshot((doc) => {
                 if(doc.data()){
                     const data = JSON.parse(doc.data().elements);
                     var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
-                    //console.log(data,source);
                     if(source ==="Server"){
-                        //so sanh data vs elements, neu element khac vs data thi set
+                        //compare data vs elements, if element difference with data => setElements
                         if(permission === false){
                             if(JSON.stringify(data) !== JSON.stringify(elements)){
                                 setElements([...data]);
@@ -158,21 +159,19 @@ export default function Board({children}) {
             return () => unsubscribe();
         }
     })
+    //update data to firestore
     useLayoutEffect(() => {
         if(selectedRoomId && action==="none" && permission){
                 db.collection("boards").doc(String(selectedRoomId)).set({elements: JSON.stringify(elements)}) 
         }
-        
         if(action !== "dragging"){
             drawImageToCanvas();
         }
-        
-        
     }, [elements,options]);
     
 
     
-
+    //Undo and redo event
     useEffect(() => {
         const undoRedoFunction = event => {
         if ((event.metaKey || event.ctrlKey) && event.key === "z") {
@@ -183,23 +182,21 @@ export default function Board({children}) {
             }
             }
         };
-    
         document.addEventListener("keydown", undoRedoFunction);
         return () => {
         document.removeEventListener("keydown", undoRedoFunction);
         };
     }, [undo, redo]);
 
+    //listen from tools
     useLayoutEffect(() => {
         if(tool !== "selection"){
             setSelected(null);
-        }
-        if(tool !== "cursor"){
-            
-
+            canvasRef.current.style.cursor = "default";
         }
     }, [tool]);
     
+    //Create area to writting text
     useEffect(() => {
         const textArea = textAreaRef.current;
         if (action === "writing") {
@@ -208,6 +205,7 @@ export default function Board({children}) {
         }
     }, [action, selectedElement]);
     
+    //Update element function
     const updateElement = (id, x1, y1, x2, y2, type, options,src) => {
         const elementsCopy = [...elements];
         switch (type) {
@@ -240,6 +238,8 @@ export default function Board({children}) {
     
         setElements(elementsCopy, true);
     };
+
+    //Draw Element function
     const drawElement = async(roughCanvas, context, element) => {
         let {x1,y1,x2,y2,options,src} = element;
         switch (element.type) {
@@ -281,6 +281,7 @@ export default function Board({children}) {
         }
     }; 
 
+    //Handle event when mouse down
     const handleMouseDown = (event) =>{
         if (action === "writing") return;
         let {clientX, clientY} = event;
@@ -326,6 +327,7 @@ export default function Board({children}) {
             setAction(tool === "text" ? "writing" : "drawing");
         }
     }
+    //Handle event when mouse move
     const handleMouseMove = (event) => {
         let { clientX, clientY } = event;
         const transformedCursorPosition = getTransformedPoint(clientX, clientY);
@@ -340,7 +342,6 @@ export default function Board({children}) {
         if (action === "drawing") {
             const index = elements.length - 1;
             const { x1, y1, options,src } = elements[index];
-            //console.log(src);
             updateElement(index, x1, y1, clientX, clientY, tool, options,src);
         } else if (action === "moving") {
             if (selectedElement.type === "pencil") {
@@ -383,7 +384,7 @@ export default function Board({children}) {
             }
         } 
     };
-
+    //Handle event when mouse up
     const handleMouseUp = async (event) => {
         let { clientX, clientY } = event;
         const transformedCursorPosition = getTransformedPoint(clientX, clientY);
@@ -419,6 +420,7 @@ export default function Board({children}) {
         setSelectedElement(null);
     };
 
+    //Handle event when mobile touch
     const handleTouchStart = (event) =>{
         if (action === "writing") return;
         let {clientX, clientY} = event.changedTouches[0];
@@ -464,12 +466,13 @@ export default function Board({children}) {
             setAction(tool === "text" ? "writing" : "drawing");
         }
     }
+    //Handle event when mobile touch move
     const handleTouchMove = (event) => {
         let {clientX, clientY} = event.changedTouches[0];
         const transformedCursorPosition = getTransformedPoint(clientX, clientY);
         clientX = transformedCursorPosition.x;
         clientY = transformedCursorPosition.y;
-        //console.log(clientX ," : " , transformedCursorPosition.x);
+
         if (tool === "selection") {
             const element = getElementAtPosition(clientX, clientY, elements);
             event.target.style.cursor = element? cursorForPosition(element.position) : "default";
@@ -522,6 +525,7 @@ export default function Board({children}) {
         } 
     };
 
+    //Handle event when mobile touch end
     const handleTouchEnd = async (event) => {
         let {clientX, clientY} = event.changedTouches[0];
         const transformedCursorPosition = getTransformedPoint(clientX, clientY);
@@ -557,12 +561,15 @@ export default function Board({children}) {
         setSelectedElement(null);
     };
     
+    //function support for writting text
     const handleBlur = event => {
         const { id, x1, y1, type, options } = selectedElement;
         setAction("none");
         setSelectedElement(null);
         updateElement(id, x1, y1, null, null, type, {...options,text:event.target.value} );
     };
+
+    //use mouse wheel to zoom in and zoom out
     const handleWheel = (event) =>{
         let { clientX, clientY } = event;
         if(tool==="cursor"){
@@ -579,6 +586,7 @@ export default function Board({children}) {
         }
 
     }
+
     const ZommIn = ()=>{
         
         const currentTransformedCursor = getTransformedPoint(window.innerWidth/2, window.innerHeight/2);
@@ -606,6 +614,8 @@ export default function Board({children}) {
         drawImageToCanvas();
     }
 
+
+    //support calculating coordinates when zoom in and zoom out
     function getTransformedPoint(x, y) {
         const context = canvasRef.current.getContext('2d');
         const inverseTransform = context.getTransform().invertSelf();
@@ -683,10 +693,6 @@ export default function Board({children}) {
                     <button onClick={ZoomOut}>ZoomOut</button>
                 </div>
             </div>
-            
-
-        
-
         </BoardContext.Provider>
             
     )

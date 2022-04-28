@@ -11,9 +11,9 @@ export default function PickSize() {
         const {id} = selected;
     }
     
-    //xảy ra khi selected thay đổi
+
     useEffect(()=>{
-        if(selected){ //hiển thị lại theo element được chọn
+        if(selected){
             const currentstrokeWidth =selected.options.strokeWidth;
             document.querySelector('#StrokeWidth').value = currentstrokeWidth;  
             setOptions(prev =>({
@@ -24,14 +24,14 @@ export default function PickSize() {
 
     },[selected]);
     
-    //khi thay đổi giá trị
+
     const changeSize = (e) =>{ 
-        if(tool === "rectangle" || tool === "line" || tool === "circle"){//đổi màu bút vẽ
+        if(tool === "rectangle" || tool === "line" || tool === "circle"){
             setOptions(prev =>({
                 ...prev,
                 strokeWidth:e.target.value
             }))
-        }else if(tool ==="selection"){ //đổi màu element và đổi màu bút vẽ 
+        }else if(tool ==="selection"){
             if(selected){
                 console.log("width : ",selected.options.strokeWidth);
                 selected.options.strokeWidth = e.target.value;

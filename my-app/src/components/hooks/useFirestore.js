@@ -11,7 +11,7 @@ const useFirestore = (collection, condition) => {
         setDocuments([]);
         return;
       }
-
+      //filter collection
       collectionRef = collectionRef.where(
         condition.fieldName,
         condition.operator,
@@ -19,6 +19,7 @@ const useFirestore = (collection, condition) => {
       );
     }
 
+    //onSnapShot is listen change from firestore
     const unsubscribe = collectionRef.onSnapshot((snapshot) => {
       const documents = snapshot.docs.map((doc) => ({
         ...doc.data(),

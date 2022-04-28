@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import { AuthContext } from './AuthProvider';
 import useFirestore from '../hooks/useFirestore';
 
-
+//where to save the App's data
 export const AppContext = React.createContext();
 
 export default function AppProvider({children}){
@@ -15,6 +15,7 @@ export default function AppProvider({children}){
         user: { uid },
     } = React.useContext(AuthContext);
     
+    //Take rooms from firestore
     const roomsCondition = React.useMemo(() => {
         return {
             fieldName : 'members',
@@ -22,17 +23,16 @@ export default function AppProvider({children}){
             compareValue: uid,
         };
     },[uid]);
-    //console.log(selectedRoomId);
     const rooms = useFirestore('rooms',roomsCondition);
     
-
+    //find selected room
     const selectedRoom = React.useMemo(
         () => rooms.find((room) => room.id === selectedRoomId) || {},
         [rooms, selectedRoomId]
     );
 
 
-    //lấy members
+    //Take rooms from members
     const usersCondition = React.useMemo(() => {
         return {
             fieldName: 'uid',
@@ -40,10 +40,9 @@ export default function AppProvider({children}){
             compareValue: selectedRoom.members,
         };
     }, [selectedRoom.members]);
-    
     const members = useFirestore('users', usersCondition);
-    // console.log({selectedRoom});
 
+    //Take members Control
     const ControlCondition = React.useMemo(() => {
         return {
             fieldName: 'uid',
@@ -51,7 +50,6 @@ export default function AppProvider({children}){
             compareValue: selectedRoom.control,
         };
     }, [selectedRoom.members]);
-    
     const Membercontrols = useFirestore('users', ControlCondition);
     //console.log({Membercontrols});
 

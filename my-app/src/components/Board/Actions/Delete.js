@@ -1,4 +1,4 @@
-import React, {useLayoutEffect } from 'react'
+import React from 'react'
 import DeleteImg from '../picture/close.png';
 import { BoardContext } from '../Board';
 import { AppContext } from '../../Context/AppProvider';

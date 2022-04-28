@@ -6,9 +6,9 @@ export default function FillStyle() {
         tool,selected,options,setOptions
     } = React.useContext(BoardContext);
 
-    //xảy ra khi selected thay đổi
+
     useEffect(()=>{
-        if(selected){ //hiển thị lại theo element được chọn
+        if(selected){
             const currentFillStyle =selected.options.fillStyle;
             document.querySelector('#fillStyle').value = currentFillStyle;  
             setOptions(prev =>({
@@ -19,16 +19,15 @@ export default function FillStyle() {
 
     },[selected]);
     
-    //khi thay đổi giá trị
+    
     const handleOnChange = (e) =>{ 
-        if(tool === "rectangle" || tool === "line" || tool === "circle"){//đổi màu bút vẽ
+        if(tool === "rectangle" || tool === "line" || tool === "circle"){
             setOptions(prev =>({
                 ...prev,
                 fillStyle:e.target.value
             }))
-        }else if(tool ==="selection"){ //đổi màu element và đổi màu bút vẽ 
+        }else if(tool ==="selection"){  
             if(selected){
-                //console.log("changing");
                 selected.options.fillStyle = e.target.value;
 
                 const currentFillStyle =selected.options.fillStyle;

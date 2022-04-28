@@ -6,10 +6,9 @@ export default function FontSize() {
         tool,selected,options,setOptions,elements,setElements
     } = React.useContext(BoardContext);
 
-    console.log(options);
-    //xảy ra khi selected thay đổi
+
     useEffect(()=>{
-        if(selected){ //hiển thị lại theo element được chọn
+        if(selected){
             console.log({selected});
             const current =selected.options.fontSize;
             document.querySelector('#FontSize').value = current;  
@@ -21,14 +20,14 @@ export default function FontSize() {
 
     },[selected]);
     
-    //khi thay đổi giá trị
+
     const changeSize = (e) =>{ 
-        if(tool === "text"){//đổi màu bút vẽ
+        if(tool === "text"){
             setOptions(prev =>({
                 ...prev,
                 fontSize:e.target.value
             }))
-        }else if(tool ==="selection"){ //đổi màu element và đổi màu bút vẽ 
+        }else if(tool ==="selection"){
             if(selected){
                 console.log("width : ",selected.options.fontSize);
                 selected.options.fontSize = e.target.value;

@@ -6,7 +6,7 @@ import { debounce } from '@mui/material';
 import Avatar from 'antd/lib/avatar/avatar';
 import { db } from '../firebase/config';
 
-
+//custome select for form
 function DebounceSelect({fetchOptions, debounceTimeout = 300, ...props}){
     const [fetching,setFetching] = useState(false);
     const [options, setOptions] = useState([]);
@@ -65,7 +65,7 @@ async function fetchUserList(search, curMembers){
 
 
    
-
+//Invite modal customed
 export default function InviteMemberModal(){
     const {isInviteMemberVisible,setIsInviteMemberVisible, selectedRoomId,selectedRoom} = useContext(AppContext);
     const {user: {uid}} = useContext(AuthContext);

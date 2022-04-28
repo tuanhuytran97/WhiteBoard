@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { BoardContext } from '../Board';
 
 export default function PencelSize() {
     const {
         tool,selected,options,setOptions
     } = React.useContext(BoardContext);
-    //xảy ra khi selected thay đổi
+
     useEffect(()=>{
-        if(selected){ //hiển thị lại theo element được chọn
+        if(selected){
             const currentSize =selected.options.size;
             document.querySelector('#pencelSize').value = currentSize;  
             setOptions(prev =>({
@@ -18,16 +18,15 @@ export default function PencelSize() {
 
     },[selected]);
     
-    //khi thay đổi giá trị
     const changeSize = (e) =>{ 
-        if(tool === "pencil"){//đổi màu bút vẽ
+        if(tool === "pencil"){
 
             setOptions(prev =>({
                 ...prev,
                 size: e.target.value 
             }))
             
-        }else if(tool ==="selection"){ //đổi màu element và đổi màu bút vẽ 
+        }else if(tool ==="selection"){
             if(selected){
                 selected.options.size = e.target.value;
 

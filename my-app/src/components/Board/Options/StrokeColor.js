@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React, {useEffect} from 'react'
 import { BoardContext } from '../Board';
 
 export default function StrokeColor() {
@@ -6,9 +6,9 @@ export default function StrokeColor() {
         tool,selected,options,setOptions
     } = React.useContext(BoardContext);
 
-    //xảy ra khi selected thay đổi
+
     useEffect(()=>{
-        if(selected){ //hiển thị lại theo element được chọn
+        if(selected){
             const currentStroke =selected.options.stroke;
             document.querySelector('#strokeColor').value = currentStroke;  
             setOptions(prev =>({
@@ -19,14 +19,13 @@ export default function StrokeColor() {
 
     },[selected]);
     
-    //khi thay đổi giá trị
     const chaneColor = (e) =>{ 
-        if(tool === "rectangle" || tool === "line" || tool === "circle"){//đổi màu bút vẽ
+        if(tool === "rectangle" || tool === "line" || tool === "circle"){
             setOptions(prev =>({
                 ...prev,
                 stroke:e.target.value
             }))
-        }else if(tool ==="selection"){ //đổi màu element và đổi màu bút vẽ 
+        }else if(tool ==="selection"){
             if(selected){
                 selected.options.stroke = e.target.value;
 

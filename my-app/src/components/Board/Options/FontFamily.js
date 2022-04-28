@@ -6,10 +6,9 @@ export default function FontFamily() {
         tool,selected,options,setOptions
     } = React.useContext(BoardContext);
 
-    console.log(options);
-    //xảy ra khi selected thay đổi
+
     useEffect(()=>{
-        if(selected){ //hiển thị lại theo element được chọn
+        if(selected){
             console.log({selected});
             const current =selected.options.fontFamily;
             document.querySelector('#FontFamily').value = current;  
@@ -21,14 +20,14 @@ export default function FontFamily() {
 
     },[selected]);
     
-    //khi thay đổi giá trị
+
     const changeSize = (e) =>{ 
-        if(tool === "text"){//đổi màu bút vẽ
+        if(tool === "text"){
             setOptions(prev =>({
                 ...prev,
                 fontFamily:e.target.value
             }))
-        }else if(tool ==="selection"){ //đổi màu element và đổi màu bút vẽ 
+        }else if(tool ==="selection"){
             if(selected){
                 console.log("width : ",selected.options.fontFamily);
                 selected.options.fontFamily = e.target.value;

@@ -7,10 +7,9 @@ export default function Fill() {
         tool,selected,options,setOptions
     } = React.useContext(BoardContext);
     
-    //xảy ra khi selected thay đổi
+    
     useEffect(()=>{
-        if(selected ){ //hiển thị lại theo element được chọn
-            //console.log({selected})
+        if(selected ){ 
             if(selected.type === "line" || selected.type ==="rectangle" || selected.type === "circle"){
                 const currentFill =selected.options.fill;
                 document.querySelector('#fillColor').value = currentFill;  
@@ -33,9 +32,9 @@ export default function Fill() {
 
     },[selected]);
     
-    //khi thay đổi giá trị
+
     const chaneColor = (e) =>{ 
-        if(tool === "rectangle" || tool === "line" || tool === "circle"){//đổi màu bút vẽ
+        if(tool === "rectangle" || tool === "line" || tool === "circle"){
             setOptions(prev =>({
                 ...prev,
                 fill:e.target.value
@@ -47,7 +46,7 @@ export default function Fill() {
                 penFillStyle:e.target.value
             }))
 
-        }else if(tool ==="selection"){ //đổi màu element và đổi màu bút vẽ 
+        }else if(tool ==="selection"){ 
             if(selected){
                 if(selected.type === "line" || selected.type === "rectangle" || selected.type === "circle"){
                     selected.options.fill = e.target.value;
