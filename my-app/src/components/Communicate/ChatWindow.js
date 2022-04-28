@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Tooltip, Avatar, Form, Input, Alert } from 'antd';
 import { UserAddOutlined, DownOutlined } from '@ant-design/icons';
 import Message from './Message';
 import { AppContext } from '../Context/AppProvider';
-import AuthProvider, { AuthContext } from '../Context/AuthProvider';
+import { AuthContext } from '../Context/AuthProvider';
 import { addDocument } from '../firebase/service';
 import useFirestore from '../hooks/useFirestore';
 const HeaderStyled = styled.div`
@@ -86,25 +86,24 @@ export default function ChatWindow(){
     const [form] = Form.useForm();
 
     //Chat content always bottom
-    
     var messageBody = document.querySelector('.bodyContent');
     if(messageBody){
         messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
     }
     
-    
+    //auto hidden chat box
     const hiddenChatBox = () =>{
         document.getElementsByClassName("ChatWindow")[0].style.visibility = "hidden";
         document.getElementsByClassName("ChatFrame")[0].style.visibility = "visible";
     }
 
-    //khi nhập bàn phím value sự tự động nhận
+    //auto change value when typing
     const handleInputChange = (e) =>{
         document.body.style.overflow = "hidden";
         setInputValue(e.target.value);
         
     }
-    //khi nhấn submit value đc gửi lên db
+    //send data to firestore
     const handleOnSubmit = () =>{
         addDocument('messages', {
             text: inputValue,
@@ -116,7 +115,7 @@ export default function ChatWindow(){
         form.resetFields(['messages']);
     };
 
-    //lấy mess
+    //message conditoion
     const messCondition = useMemo(() => ({
         fieldName: 'roomId',
         operator: '==',

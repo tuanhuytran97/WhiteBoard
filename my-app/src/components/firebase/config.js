@@ -30,7 +30,7 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const database = firebase.database();
 
-//gia lap database
+//Emulator database of firestore
 // connectAuthEmulator(auth, "http://localhost:9099");
 // if(window.location.hostname === 'localhost'){
 //   auth.useEmulator('http://localhost:9099');

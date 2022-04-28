@@ -36,12 +36,7 @@ export default function RoomList() {
     const {rooms, setIsAddRoomVisible,selectedRoomId, setSelectedRoomId} = React.useContext(AppContext);
     const {canvasRef,setElements,setTool} = React.useContext(BoardContext);
     const navigate = useNavigate();
-    // const [searchParams,setSearchParams] = useSearchParams();
 
-    // useEffect(() => {
-    //     const value = searchParams.get("room");
-    //     console.log(value);
-    // },[searchParams]);
 
 
     useEffect(()=>{

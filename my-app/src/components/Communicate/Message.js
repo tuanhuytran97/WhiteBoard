@@ -32,6 +32,7 @@ function formatDate(seconds) {
     return formattedDate;
 }
 
+//Wrapper message
 export default function Message({ text, displayName, createdAt, photoURL }) {
     return (
         <WrapperStyled>
