@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import { Collapse, Typography, Button } from 'antd';
 import styled from 'styled-components';
-import { PlusSquareOutlined } from '@ant-design/icons';
 import { AppContext } from '../Context/AppProvider';
-import { createSearchParams, Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BoardContext } from '../Board/Board';
-import rough from 'roughjs/bundled/rough.esm';
 import { db } from '../firebase/config';
 
 
@@ -36,9 +34,8 @@ const LinkStyled = styled(Typography.Link)`
 
 export default function RoomList() {
     const {rooms, setIsAddRoomVisible,selectedRoomId, setSelectedRoomId} = React.useContext(AppContext);
-    const {canvasRef,options,setOptions,setElements,setTool} = React.useContext(BoardContext);
+    const {canvasRef,setElements,setTool} = React.useContext(BoardContext);
     const navigate = useNavigate();
-    const {userId,roomId} = useParams();
     // const [searchParams,setSearchParams] = useSearchParams();
 
     // useEffect(() => {

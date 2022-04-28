@@ -27,14 +27,14 @@ import chatIcon from '../picture/chat.png'
 import { BoardContext } from '../Board';
 import Sidebar from '../../Communicate/Sidebar';
 import styled from 'styled-components';
-import { Button, Tooltip, Avatar, Form, Input, Alert, Upload } from 'antd';
+import { Tooltip, Avatar, Form } from 'antd';
 import { AppContext } from '../../Context/AppProvider';
 import { AuthContext } from '../../Context/AuthProvider';
-import { addDocument, DeleteDocument } from '../../firebase/service';
+import { addDocument} from '../../firebase/service';
 import useFirestore from '../../hooks/useFirestore';
 import ChatWindow from '../../Communicate/ChatWindow';
-import firebase,{ db } from '../../firebase/config';
-import { createElement, getBase64 } from '../BoardLibrary';
+import firebase from '../../firebase/config';
+import { createElement } from '../BoardLibrary';
 import FontFamily from '../Options/FontFamily';
 import BringToFront from '../Actions/BringToFront';
 import BringToBack from '../Actions/BringToBack';
@@ -47,7 +47,6 @@ const ButtonGroupStyled = styled.div`
 export default function TopHeader() {
     const {selectedRoom,members, setIsInviteMemberVisible,setIsGiveControlMemberVisible,selectedRoomId} = useContext(AppContext);
     const [options,setOptions] = useState("");
-    const isMobile = false;
     const {
         tool,setTool,setElements,selected,permission,elements,canvasRef,setImgSrc,drawImageToCanvas
     } = React.useContext(BoardContext);

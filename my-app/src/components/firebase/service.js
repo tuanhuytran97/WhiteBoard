@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
-import { BoardContext } from '../Board/Board';
+import { useEffect, useState } from 'react';
 import firebase, { db } from './config';
 
 export const addDocument = (collectionn, data) => {

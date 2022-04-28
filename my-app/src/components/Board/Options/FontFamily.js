@@ -3,7 +3,7 @@ import { BoardContext } from "../Board";
 
 export default function FontFamily() {
     const {
-        tool,selected,options,setOptions,elements,setElements
+        tool,selected,options,setOptions
     } = React.useContext(BoardContext);
 
     console.log(options);

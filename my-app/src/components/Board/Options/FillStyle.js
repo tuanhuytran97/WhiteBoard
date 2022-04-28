@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect} from 'react'
 import { BoardContext } from '../Board';
 
 export default function FillStyle() {

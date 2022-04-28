@@ -1,9 +1,5 @@
-import getStroke from "perfect-freehand";
-import { useContext, useState } from "react";
-import rough from 'roughjs/bundled/rough.esm';
-import { AppContext } from "../Context/AppProvider";
-import { db } from "../firebase/config";
-import { BoardContext } from "./Board";
+import { useState } from "react";
+
 
 
 // Gets the relevant location from a mouse or single touch event

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { auth } from './../firebase/config';
 import { AuthContext } from '../../components/Context/AuthProvider';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../Context/AppProvider';
 
 
@@ -35,7 +35,7 @@ export default function UserInfo() {
         photoURL
     }} = React.useContext(AuthContext);
     const navigate = useNavigate();
-    const {rooms, setIsAddRoomVisible,selectedRoomId, setSelectedRoomId} = React.useContext(AppContext);
+    const { setSelectedRoomId} = React.useContext(AppContext);
     const handleLogout = () => {
         setSelectedRoomId('');
         navigate(``); 
