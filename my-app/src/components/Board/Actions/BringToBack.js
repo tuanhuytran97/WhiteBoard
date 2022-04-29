@@ -7,6 +7,7 @@ export default function BringToBack() {
         selected,setSelected,elements,setElements
     } = React.useContext(BoardContext);
 
+    //move element to the end of the array
     const handleBringToBack = () => {
         if(selected){
             const {id} = selected;

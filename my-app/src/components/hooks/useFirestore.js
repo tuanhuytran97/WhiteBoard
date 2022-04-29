@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../firebase/config';
 
+//Function get, listen data from firestore with collection and condition
 const useFirestore = (collection, condition) => {
   const [documents, setDocuments] = useState([]);
 

@@ -3,6 +3,7 @@ import { Avatar, Typography } from 'antd';
 import styled from 'styled-components';
 import { formatRelative } from 'date-fns/esm';
 
+//Style css custome
 const WrapperStyled = styled.div`
     margin-bottom: 10px;
     .author {

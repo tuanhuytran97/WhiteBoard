@@ -44,7 +44,7 @@ function DebounceSelect({fetchOptions, debounceTimeout = 300, ...props}){
         </Select>
     )
 }
-
+//Fetch user with search name from firestore
 async function fetchUserList(search, curMembers){
         return db
         .collection('users')
@@ -88,11 +88,13 @@ export default function InviteMemberModal(){
         }
         
     }
-    const copyURL = () => {
+    //Copy URL from button click
+    const handleCopy = () => {
         const text = document.getElementById("myURL");
         text.select();
         navigator.clipboard.writeText(text.value);
     }
+    //Cancle button click
     const handleCancel = () => {
         setIsInviteMemberVisible(false);
     }
@@ -109,7 +111,7 @@ export default function InviteMemberModal(){
                 <Form layout="vertical">
                     <p>Share this link with anyone: </p>
                     <Input type="text" value={window.location.href} id="myURL" style={{maxWidth:"79%",marginRight:"5px"}} readOnly />
-                    <Button onClick={copyURL}>Copy</Button>
+                    <Button onClick={handleCopy}>Copy</Button>
                 </Form>
                 <Form form={form} layout="vertical" style={{marginTop:"20px"}}>
                     <p>Invite members with Display name: </p>

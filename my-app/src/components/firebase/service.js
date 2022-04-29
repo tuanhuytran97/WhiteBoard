@@ -44,6 +44,7 @@ export const useGetData = (selectedRoomId) =>{
     
 }
 
+//Split displayName for searching
 export const generateKeywords = (displayName) => {
     // list all permutations. ex: name = ["David", "Van", "Teo"]
     // => ["David", "Van", "Teo"], ["David", "Teo", "Van"], ["Teo", "David", "Van"],...

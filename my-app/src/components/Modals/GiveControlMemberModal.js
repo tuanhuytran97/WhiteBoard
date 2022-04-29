@@ -45,6 +45,7 @@ function DebounceSelect({fetchOptions, debounceTimeout = 300, ...props}){
     )
 }
 
+//Fetch user with search name from firestore
 async function fetchUserList(search, curMembers){
         return db
         .collection('users')

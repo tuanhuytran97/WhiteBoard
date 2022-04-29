@@ -42,18 +42,20 @@ export default function Board({children}) {
     }} = useContext(AuthContext);
     const {selectedRoomId,Membercontrols,setSelectedRoomId} = useContext(AppContext);
     const [tool,setTool] = useState("cursor");
+
+    //update data from firestore and update history
     const initData = useGetData(selectedRoomId);
     const [elements, setElements, undo, redo] = useHistory(initData);
+
+
     const [action, setAction] = useState("none");
     const [selectedElement, setSelectedElement] = useState(null);
     const [selected, setSelected] = useState(null);
     const permission = usePermission(Membercontrols,uid);
     const textAreaRef = useRef();
     const [searchParams,setSearchParams] = useSearchParams();
-    //const [zoom, setZoom] = useState(1);
     const canvasRef = useRef(null);
     const [imgSrc,setImgSrc] = useState(null);
-    //const [currentTransformedCursor,setCurrentTransformedCursor] = useState({x: 0, y: 0}); 
     const [dragStartPosition,setDragStartPosition] = useState({x:0,y:0});
     const [options,setOptions] = useState({
         fillStyle:"solid",
@@ -83,7 +85,7 @@ export default function Board({children}) {
         
         
     })
-
+    //read url image
     function toDataURL(url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
@@ -97,6 +99,8 @@ export default function Board({children}) {
         xhr.responseType = 'blob';
         xhr.send();
     }
+
+    //Draw function
     const drawImageToCanvas = async () =>{
         const context = canvasRef.current.getContext('2d');
         
@@ -410,7 +414,7 @@ export default function Board({children}) {
     
         if (action === "writing") return;
 
-        //only for pencil
+        //update element 
         if(selectedElement){
             if(selectedRoomId && (selectedElement.type === "pencil"|| selectedElement.type === "text" || selectedElement.type === "circle")){
                 db.collection("boards").doc(String(selectedRoomId)).set({elements: JSON.stringify(elements)}) 
@@ -587,6 +591,7 @@ export default function Board({children}) {
 
     }
 
+    //handle zoom in
     const ZommIn = ()=>{
         
         const currentTransformedCursor = getTransformedPoint(window.innerWidth/2, window.innerHeight/2);
@@ -600,7 +605,7 @@ export default function Board({children}) {
         drawImageToCanvas();
         
     }
-
+    //handle zoom out
     const ZoomOut = () =>{
         const currentTransformedCursor = getTransformedPoint(window.innerWidth/2, window.innerHeight/2);
 

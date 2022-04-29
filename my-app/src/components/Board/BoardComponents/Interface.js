@@ -276,10 +276,8 @@ export default function TopHeader() {
                 address: await fileRef.getDownloadURL()
             }
             setImgSrc(src) ;
-            
-            
-            //localStorage.setItem(`${file.name}`,reader.result);
-            
+
+            //store to local storage
             var reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = ()  =>{

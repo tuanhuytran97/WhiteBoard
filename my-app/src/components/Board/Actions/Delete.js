@@ -11,6 +11,7 @@ export default function Delete() {
     } = React.useContext(BoardContext);
     const {selectedRoomId} = React.useContext(AppContext);
   
+    //delete selected element
     function removeElementId() {
         const elementCopy = [...elements];
         const {id} = selected;

@@ -7,6 +7,8 @@ function Clear(props) {
 
     const {setElements, setSelected} = useContext(BoardContext);
     const {selectedRoomId} = useContext(AppContext);
+
+    //Delete data from firestore, board.
     const handleReset = () => {
         db.collection('boards').doc(String(selectedRoomId)).delete();
         setElements([]);

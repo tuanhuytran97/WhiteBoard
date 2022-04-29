@@ -5,9 +5,12 @@ import { Button, Col, Row, Typography } from 'antd';
 
 const { Title } = Typography;
 
+//Provider from firebase
 const fbProvider = new firebase.auth.FacebookAuthProvider();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
+
+//Login handle
 export default function Login() {
   const handleLogin = async (provider) => {
     const { additionalUserInfo, user } = await auth.signInWithPopup(provider);

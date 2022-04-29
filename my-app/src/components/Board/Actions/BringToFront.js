@@ -7,7 +7,7 @@ export default function BringToFront() {
         selected,setSelected,elements,setElements
     } = React.useContext(BoardContext);
 
-
+    //move element to the beginning of the array
     const handleBringToFront = () => {
         if(selected){
             const {id} = selected;

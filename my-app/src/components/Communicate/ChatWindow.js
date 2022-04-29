@@ -7,6 +7,7 @@ import { AppContext } from '../Context/AppProvider';
 import { AuthContext } from '../Context/AuthProvider';
 import { addDocument } from '../firebase/service';
 import useFirestore from '../hooks/useFirestore';
+//Style css custome
 const HeaderStyled = styled.div`
     display: flex;
     justify-content: space-between;
@@ -33,12 +34,12 @@ const HeaderStyled = styled.div`
         }
     }
 `;
-
+//Style css custome
 const ButtonGroupStyled = styled.div`
     display: flex;
     align-items: center;
 `;
-
+//Style css custome
 const WrapperStyled = styled.div`
     width: 327px;
     height: 80vh;
@@ -46,7 +47,7 @@ const WrapperStyled = styled.div`
     border-style: ridge;
     background: lavenderblush;
 `;
-
+//Style css custome
 const ContentStyled = styled.div`
     height: calc(100% - 56px);
     display: flex;
@@ -54,7 +55,7 @@ const ContentStyled = styled.div`
     padding: 11px;
     justify-content: flex-end;
 `;
-
+//Style css custome
 const FormStyled = styled(Form)`
     display: inline-flex;
     justify-content: space-between;
@@ -68,7 +69,7 @@ const FormStyled = styled(Form)`
         margin-bottom: 0;
     }
 `;
-
+//Style css custome
 const MessageListStyled = styled.div`
     max-height: 100%;
     overflow-y: auto;
